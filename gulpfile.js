@@ -34,4 +34,4 @@ gulp.task('serve', function () {
   })
 })
 
-gulp.task('default', ['serve', 'watch'])
+gulp.task('default', ['inject', 'serve', 'watch'])
