@@ -1,23 +1,23 @@
-;(function () {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('ngseed.home')
-    .controller('HomeController', HomeController)
+    .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$http']
-  function HomeController ($http) {
-    var vm = this
+  HomeController.$inject = ['$http', '$log'];
+  function HomeController ($http, $log) {
+    var vm = this;
 
-    activate()
+    activate();
 
     function activate () {
-      vm.testvar = ''
+      vm.testvar = '';
       vm.getMyIP = function () {
         $http.get('http://httpbin.org/ip').then(function (response) {
-          console.log(response.data)
-        })
-      }
+          $log.info(response.data);
+        });
+      };
     }
   }
-})()
+})();

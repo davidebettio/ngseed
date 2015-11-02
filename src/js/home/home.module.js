@@ -1,11 +1,11 @@
-;(function () {
-  'use strict'
+(function () {
+  'use strict';
 
   angular
     .module('ngseed.home', [])
-    .config(routeConfig)
+    .config(routeConfig);
 
-  routeConfig.$inject = ['$stateProvider']
+  routeConfig.$inject = ['$stateProvider'];
   function routeConfig ($stateProvider) {
     $stateProvider
       .state('home', {
@@ -13,6 +13,6 @@
         controller: 'HomeController',
         controllerAs: 'vm',
         templateUrl: 'views/home.html'
-      })
+      });
   }
-})()
+})();

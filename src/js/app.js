@@ -1,5 +1,5 @@
-;(function () {
-  'use strict'
+(function () {
+  'use strict';
 
   angular.module('ngseed', [
     'ui.router',
@@ -8,14 +8,14 @@
     'ngseed.home'
   ])
     .value('version', '0.0.1')
-    .config(config)
+    .config(config);
 
-  config.$inject = ['$urlRouterProvider', 'cfpLoadingBarProvider']
+  config.$inject = ['$urlRouterProvider', 'cfpLoadingBarProvider'];
   function config ($urlRouterProvider, cfpLoadingBarProvider) {
     // default state
-    $urlRouterProvider.otherwise('/home')
+    $urlRouterProvider.otherwise('/home');
 
     // loading bar
-    cfpLoadingBarProvider.includeSpinner = false
+    cfpLoadingBarProvider.includeSpinner = false;
   }
-})()
+})();
