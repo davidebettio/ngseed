@@ -15,8 +15,10 @@
     "gulp-filelog": "^0.4.1",
     "gulp-inject": "^3.0.0",
     "gulp-load-plugins": "^1.0.0",
+    "gulp-ng-annotate": "^1.1.0",
     "gulp-serve": "^1.2.0",
-    "main-bower-files": "^2.9.0"
+    "main-bower-files": "^2.9.0",
+    "ng-annotate": "^1.0.2"
   },
   "standard": {
     "globals": [

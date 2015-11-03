@@ -40,4 +40,10 @@ gulp.task('clean', function () {
   ]);
 });
 
+gulp.task('build', function () {
+    return gulp.src('./src/js/**/*.js')
+        .pipe($.ngAnnotate())
+        .pipe(gulp.dest('dist'));
+});
+
 gulp.task('default', ['inject', 'serve', 'watch']);
