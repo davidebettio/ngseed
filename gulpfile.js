@@ -5,43 +5,54 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'del']
 });
 
+var paths = {
+  html: ['./src/app/**/*.html'],
+  js: ['./src/app/**/*.js'],
+  css: ['./src/css/**/*.css'],
+  index: './src/index.html',
+  src: './src',
+  dist: './dist'
+};
+
 gulp.task('inject', function () {
-  var target = gulp.src('./src/index.html');
+  var target = gulp.src(paths.index);
   var bowerSources = gulp.src($.mainBowerFiles(), {read: false});
-  var appSources = gulp.src('./src/js/**/*.js');
-  var cssSources = gulp.src('./src/css/**/*.css');
+  var appSources = gulp.src(paths.js);
+  var cssSources = gulp.src(paths.css);
 
   return target
-    .pipe($.inject(bowerSources, {name: 'bower', ignorePath: 'src'}))
-    .pipe($.inject(appSources.pipe($.angularFilesort()), {ignorePath: 'src'}))
-    .pipe($.inject(cssSources, {ignorePath: 'src'}))
-    .pipe(gulp.dest('./src'))
+    // .pipe($.inject(bowerSources, {name: 'bower', ignorePath: 'src'}))
+    // .pipe($.inject(appSources.pipe($.angularFilesort()), {ignorePath: 'src'}))
+    // .pipe($.inject(cssSources, {ignorePath: 'src'}))
+    .pipe($.inject(bowerSources, {name: 'bower'}))
+    .pipe($.inject(appSources.pipe($.angularFilesort())))
+    .pipe($.inject(cssSources))
+    .pipe(gulp.dest(paths.src))
     .pipe($.connect.reload());
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./src/js/**/*.js', './bower.json'], ['inject']);
-  gulp.watch('./src/**/*.html', function () {
-    gulp.src('./src/**/*.html').pipe($.connect.reload());
+  gulp.watch('./bower.json', ['inject']);
+  gulp.watch(paths.js, ['inject']);
+  gulp.watch(paths.html, function () {
+    gulp.src(paths.html).pipe($.connect.reload());
   });
 });
 
 gulp.task('serve', function () {
   $.connect.server({
-    root: './src',
+    root: paths.src,
     livereload: true,
     port: 8000
   });
 });
 
 gulp.task('clean', function () {
-  return $.del([
-    'dist/**/*'
-  ]);
+  return $.del(paths.dist);
 });
 
 gulp.task('build', function () {
-    return gulp.src('./src/js/**/*.js')
+    return gulp.src(paths.js)
         .pipe($.ngAnnotate())
         .pipe(gulp.dest('dist'));
 });

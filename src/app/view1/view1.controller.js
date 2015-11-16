@@ -2,11 +2,10 @@
   'use strict';
 
   angular
-    .module('ngseed.home')
-    .controller('HomeController', HomeController);
+    .module('ngseed.view1')
+    .controller('View1Controller', View1Controller);
 
-  HomeController.$inject = ['$http', '$log'];
-  function HomeController ($http, $log) {
+  function View1Controller ($http, $log) {
     var vm = this;
 
     activate();

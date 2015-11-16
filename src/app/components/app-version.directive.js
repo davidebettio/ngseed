@@ -7,10 +7,8 @@
 
   appVersion.$inject = ['version'];
   function appVersion (version) {
-    return {
-      restrict: 'E',
-      replace: true,
-      template: '<span>' + version + '</span>'
+    return function(scope, elm, attrs) {
+      elm.text(version);
     };
   }
 })();

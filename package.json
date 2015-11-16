@@ -7,8 +7,6 @@
   "author": "Davide Bettio",
   "devDependencies": {
     "del": "^2.0.2",
-    "eslint": "^1.8.0",
-    "eslint-plugin-angular": "^0.13.0",
     "gulp": "^3.9.0",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-connect": "^2.2.0",
@@ -19,10 +17,5 @@
     "gulp-serve": "^1.2.0",
     "main-bower-files": "^2.9.0",
     "ng-annotate": "^1.0.2"
-  },
-  "standard": {
-    "globals": [
-      "angular"
-    ]
   }
 }
