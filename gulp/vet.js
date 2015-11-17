@@ -1,18 +1,14 @@
 'use strict';
 
 var gulp = require('gulp');
+var config = require('../gulp.config')();
 var $ = require('gulp-load-plugins')();
 var args = require('yargs').argv;
-var paths = gulp.paths;
 
 gulp.task('vet', function() {
   $.util.log($.util.colors.blue('Analyze with JSHint and JSCS'));
 
-  gulp.src([
-    paths.src + '/**/*.js',
-    './gulp/**/*.js',
-    './*.js',
-  ])
+  gulp.src(config.alljs)
   .pipe($.if(args.verbose, $.print()))
   .pipe($.jshint())
   .pipe($.jscs())
