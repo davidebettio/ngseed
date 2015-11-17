@@ -1,73 +1,117 @@
 'use strict';
 
 var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')();
+var util = require('gulp-util');
+var angularFilesort = require('gulp-angular-filesort');
+var inject = require('gulp-inject');
+var wiredep = require('wiredep');
+var del = require('del');
+var taskListing = require('gulp-task-listing');
+var jscs = require('gulp-jscs');
+var jshint = require('gulp-jshint');
+var stylish = require('gulp-jscs-stylish');
+var browserSync = require('browser-sync').create();
+var reload = browserSync.reload;
 
-gulp.paths = {
+var paths = {
   src: 'src',
   dist: 'dist',
   tmp: '.tmp',
   index: 'src/index.html',
 };
 
-require('require-dir')('./gulp');
-
 gulp.task('default', ['clean'], function() {
-  console.log('ok');
+  util.log(util.colors.blue('ok'));
 });
 
-gulp.task('help', plugins.taskListing);
+gulp.task('help', taskListing);
 
-// var paths = {
-//   html: ['./src/app/**/*.html'],
-//   js: ['./src/app/**/*.js'],
-//   css: ['./src/css/**/*.css'],
-//   index: './src/index.html',
-//   src: './src',
-//   dist: './dist'
-// };
-//
-// gulp.task('inject', function () {
-//   var target = gulp.src(paths.index);
-//   var bowerSources = gulp.src($.mainBowerFiles(), {read: false});
-//   var appSources = gulp.src(paths.js);
-//   var cssSources = gulp.src(paths.css);
-//
-//   return target
-//     // .pipe($.inject(bowerSources, {name: 'bower', ignorePath: 'src'}))
-//     // .pipe($.inject(appSources.pipe($.angularFilesort()), {ignorePath: 'src'}))
-//     // .pipe($.inject(cssSources, {ignorePath: 'src'}))
-//     .pipe($.inject(bowerSources, {name: 'bower'}))
-//     .pipe($.inject(appSources.pipe($.angularFilesort())))
-//     .pipe($.inject(cssSources))
-//     .pipe(gulp.dest(paths.src))
-//     .pipe($.connect.reload());
-// });
-//
-// gulp.task('watch', function () {
-//   gulp.watch('./bower.json', ['inject']);
-//   gulp.watch(paths.js, ['inject']);
-//   gulp.watch(paths.html, function () {
-//     gulp.src(paths.html).pipe($.connect.reload());
-//   });
-// });
-//
-// gulp.task('serve', function () {
-//   $.connect.server({
-//     root: paths.src,
-//     livereload: true,
-//     port: 8000
-//   });
-// });
-//
-// gulp.task('clean', function () {
-//   return $.del(paths.dist);
-// });
-//
-// gulp.task('build', function () {
-//     return gulp.src(paths.js)
-//         .pipe($.ngAnnotate())
-//         .pipe(gulp.dest('dist'));
-// });
-//
-// gulp.task('default', ['inject', 'serve', 'watch']);
+gulp.task('vet', function() {
+  gulp.src([
+    paths.src + '/**/*.js',
+    './*.js',
+  ])
+  .pipe(jshint())
+  .pipe(jscs())
+  .pipe(stylish.combineWithHintResults())
+  .pipe(jshint.reporter('jshint-stylish', {verbose:true}));
+});
+
+gulp.task('build', function() {
+  util.log(util.colors.blue('ok'));
+});
+
+gulp.task('clean', function() {
+  return del([
+    paths.dist,
+    paths.tmp,
+  ]);
+});
+
+gulp.task('inject', function() {
+
+  var injectStyles = gulp.src([
+      paths.tmp + '/**/*.css',
+    ], { read: false }
+  );
+
+  var injectScripts = gulp.src([
+    paths.src + '/**/*.js',
+    '!' + paths.src + '/**/*.test.js',
+  ]).pipe(
+    angularFilesort().on('error', util.log)
+  );
+
+  var injectOptions = {
+    ignorePath: 'src',
+    addRootSlash: true,
+  };
+
+  var wiredepOptions = {
+    directory: 'bower_components',
+  };
+
+  return gulp.src(paths.src + '/index.html')
+    .pipe(inject(injectStyles, injectOptions))
+    .pipe(inject(injectScripts, injectOptions))
+    .pipe(wiredep(wiredepOptions))
+    .pipe(gulp.dest(paths.tmp));
+});
+
+function browserSyncInit(baseDir, files) {
+
+  var routes = null;
+  if (baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
+    routes = {
+      '/bower_components': 'bower_components',
+    };
+  }
+
+  browserSync.instance = browserSync.init({
+    files: files,
+    startPath: '/',
+    server: {
+      baseDir: baseDir,
+      routes: routes,
+    },
+  });
+}
+
+gulp.task('serve', ['inject'], function() {
+  browserSyncInit([
+    paths.tmp,
+    paths.src,
+  ]);
+
+  gulp.watch([
+    paths.src + '/**/*.css',
+    paths.src + '/**/*.js',
+    paths.src + '/**/*.html',
+  ], ['watch']);
+});
+
+gulp.task('watch', ['inject'], reload);
+
+gulp.task('serve:dist', ['build'], function() {
+  browserSyncInit(paths.dist);
+});
