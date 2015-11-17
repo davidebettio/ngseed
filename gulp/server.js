@@ -1,10 +1,10 @@
 'use strict';
 
 var gulp = require('gulp');
+var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
 var proxy = require('./proxy');
-var nodemon = require('gulp-nodemon');
 var util = require('util');
 var paths = gulp.paths;
 
@@ -38,7 +38,7 @@ gulp.task('watch', ['inject'], function() {
 });
 
 gulp.task('nodemon', [], function() {
-  nodemon({
+  $.nodemon({
     script: 'server.js',
     ext: 'js html',
     env: { NODE_ENV: 'development' },

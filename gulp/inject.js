@@ -1,14 +1,12 @@
 'use strict';
 
 var gulp = require('gulp');
-var angularFilesort = require('gulp-angular-filesort');
-var inject = require('gulp-inject');
+var $ = require('gulp-load-plugins')();
 var wiredep = require('wiredep').stream;
-var util = require('gulp-util');
 var paths = gulp.paths;
 
 gulp.task('inject', function() {
-  util.log(util.colors.blue('Inject bower files, js and css'));
+  $.util.log($.util.colors.blue('Inject bower files, js and css'));
 
   var injectStyles = gulp.src([
       paths.tmp + '/**/*.css',
@@ -19,7 +17,7 @@ gulp.task('inject', function() {
     paths.src + '/**/*.js',
     '!' + paths.src + '/**/*.test.js',
   ]).pipe(
-    angularFilesort().on('error', util.log)
+    $.angularFilesort().on('error', $.util.log)
   );
 
   var injectOptions = {
@@ -32,8 +30,8 @@ gulp.task('inject', function() {
   };
 
   return gulp.src(paths.src + '/index.html')
-    .pipe(inject(injectStyles, injectOptions))
-    .pipe(inject(injectScripts, injectOptions))
+    .pipe($.inject(injectStyles, injectOptions))
+    .pipe($.inject(injectScripts, injectOptions))
     .pipe(wiredep(wiredepOptions))
     .pipe(gulp.dest(paths.tmp));
 });
