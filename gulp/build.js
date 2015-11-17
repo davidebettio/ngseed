@@ -6,6 +6,10 @@ var plugins = require('gulp-load-plugins')();
 var del = require('del');
 var paths = gulp.paths;
 
+gulp.task('build', function () {
+    console.log('build');
+});
+
 gulp.task('clean', function () {
     del([paths.dist, paths.tmp]);
 });
