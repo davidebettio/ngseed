@@ -1,4 +1,6 @@
 {
+    "excludeFiles": ["node_modules/**", "bower_components/**"],
+
     "esnext": true,
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true
@@ -69,7 +71,6 @@
     },
     "requirePaddingNewLinesAfterBlocks": true,
     "requireSemicolons": true,
-    "safeContextKeyword": "vm",
     "validateLineBreaks": "LF",
     "validateQuoteMarks": "'",
     "validateIndentation": 2
