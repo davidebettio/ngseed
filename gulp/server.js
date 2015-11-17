@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var reload = browserSync.reload;
 var plugins = require('gulp-load-plugins')();
 var util = require('util');
 var paths = gulp.paths;
@@ -29,12 +30,16 @@ gulp.task('serve', ['inject'], function () {
   browserSyncInit([
     paths.tmp,
     paths.src
-  ], [
+  ]);
+
+  gulp.watch([
     paths.src + '/**/*.css',
     paths.src + '/**/*.js',
     paths.src + '/**/*.html'
-  ]);
+  ], ['watch']);
 });
+
+gulp.task('watch', ['inject'], reload);
 
 gulp.task('serve:dist', ['build'], function () {
   browserSyncInit(paths.dist);

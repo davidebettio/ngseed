@@ -8,7 +8,7 @@
     function header() {
         var directive = {
             restrict: 'E',
-            templateUrl: 'layout/header.html',
+            templateUrl: 'header.html',
             scope: {
             },
             link: linkFunc,
@@ -32,7 +32,7 @@
         activate();
 
         function activate() {
-          $log.info('header controller');
+            $log.info('header controller');
         }
     }
 })();
