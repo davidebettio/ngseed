@@ -8,6 +8,7 @@ var util = require('gulp-util');
 var paths = gulp.paths;
 
 gulp.task('inject', function() {
+  util.log(util.colors.blue('Inject bower files, js and css'));
 
   var injectStyles = gulp.src([
       paths.tmp + '/**/*.css',

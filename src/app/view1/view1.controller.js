@@ -17,6 +17,12 @@
           $log.info(response.data);
         });
       };
+
+      vm.testLocalServer = function() {
+        $http.get('api/sample').then(function(response) {
+          $log.info(response.data);
+        });
+      };
     }
   }
 })();

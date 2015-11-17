@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
+var proxy = require('./proxy');
 var nodemon = require('gulp-nodemon');
 var util = require('util');
 var paths = gulp.paths;
@@ -21,12 +22,20 @@ function browserSyncInit(baseDir, files) {
     startPath: '/',
     server: {
       baseDir: baseDir,
+      middleware: proxy,
       routes: routes,
     },
   });
 }
 
-gulp.task('watch', ['inject'], reload);
+gulp.task('watch', ['inject'], function() {
+  gulp.watch([
+    paths.src + '/*.html',
+    paths.src + '/{app,components}/**/*.css',
+    paths.src + '/{app,components}/**/*.js',
+    'bower.json',
+  ]);
+});
 
 gulp.task('nodemon', [], function() {
   nodemon({
@@ -36,7 +45,7 @@ gulp.task('nodemon', [], function() {
   });
 });
 
-gulp.task('serve', ['inject'], function() {
+gulp.task('serve', ['inject', 'nodemon'], function() {
   browserSyncInit([
     paths.tmp,
     paths.src,
