@@ -7,7 +7,7 @@ gulp.paths = {
   src: 'src',
   dist: 'dist',
   tmp: '.tmp',
-  index: 'src/index.html'
+  index: 'src/index.html',
 };
 
 require('require-dir')('./gulp');

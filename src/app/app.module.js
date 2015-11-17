@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular.module('ngseed', [
@@ -7,7 +7,7 @@
     'ngAnimate',
     'ngseed.layout',
     'ngseed.view1',
-    'ngseed.view2'
+    'ngseed.view2',
   ]);
 
 })();

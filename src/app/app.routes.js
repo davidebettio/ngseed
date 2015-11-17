@@ -1,10 +1,10 @@
-(function () {
+(function() {
   'use strict';
 
   angular.module('ngseed')
     .config(routes);
 
-  function routes ($urlRouterProvider) {
+  function routes($urlRouterProvider) {
     // default state
     $urlRouterProvider.otherwise('/view1');
   }

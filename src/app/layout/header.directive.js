@@ -1,38 +1,38 @@
 (function() {
-    'use strict';
+  'use strict';
 
-    angular
-        .module('ngseed.layout', [])
-        .directive('header', header);
+  angular
+    .module('ngseed.layout', [])
+    .directive('header', header);
 
-    function header() {
-        var directive = {
-            restrict: 'E',
-            templateUrl: 'header.html',
-            scope: {
-            },
-            link: linkFunc,
-            controller: HeaderController,
-            controllerAs: 'vm',
-            bindToController: true
-        };
+  function header() {
+    var directive = {
+      restrict: 'E',
+      templateUrl: 'header.html',
+      scope: {
+      },
+      link: linkFunc,
+      controller: HeaderController,
+      controllerAs: 'vm',
+      bindToController: true,
+    };
 
-        return directive;
+    return directive;
 
-        function linkFunc(scope, el, attr, ctrl) {
+    function linkFunc(scope, el, attr, ctrl) {
 
-        }
     }
+  }
 
-    HeaderController.$inject = ['$log'];
+  HeaderController.$inject = ['$log'];
 
-    function HeaderController($log) {
-        var vm = this;
+  function HeaderController($log) {
+    var vm = this;
 
-        activate();
+    activate();
 
-        function activate() {
-            $log.info('header controller');
-        }
+    function activate() {
+      $log.info('header controller');
     }
+  }
 })();
