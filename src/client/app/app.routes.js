@@ -1,7 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('ngseed')
+  angular
+    .module('ngseed')
     .config(routes);
 
   function routes($urlRouterProvider) {

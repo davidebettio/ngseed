@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('ngseed.view1', [])
+    .module('ngseed.view1')
     .config(route);
 
   function route($stateProvider) {
@@ -11,7 +11,7 @@
         url: '/view1',
         controller: 'View1Controller',
         controllerAs: 'vm',
-        templateUrl: './view1.html',
+        templateUrl: 'app/view1/view1.html',
       });
   }
 })();

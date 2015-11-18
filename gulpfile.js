@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var util = require('gulp-util');
 var taskListing = require('gulp-task-listing');
+var libs = require('./gulp.libs');
 
 gulp.paths = {
   src: 'src',

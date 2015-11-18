@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app="ngseed">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css" />
+        <!-- endbower -->
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/.tmp/styles.css">
+        <!-- endinject -->
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+          <div ui-view></div>
+        </div>
+
+        <hr/>
+        Davide Bettio
+
+        <!-- bower:js -->
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/angular/angular.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+        <script src="/bower_components/angular-animate/angular-animate.js"></script>
+        <!-- endbower -->
+
+        <!-- inject:js -->
+        <script src="/src/client/app/view2/view2.module.js"></script>
+        <script src="/src/client/app/view2/view2.route.js"></script>
+        <script src="/src/client/app/view2/view2.controller.js"></script>
+        <script src="/src/client/app/view1/view1.module.js"></script>
+        <script src="/src/client/app/view1/view1.route.js"></script>
+        <script src="/src/client/app/view1/view1.controller.js"></script>
+        <script src="/src/client/app/layout/header.directive.js"></script>
+        <script src="/src/client/app/app.module.js"></script>
+        <script src="/src/client/app/components/app-version.directive.js"></script>
+        <script src="/src/client/app/app.routes.js"></script>
+        <script src="/src/client/app/app.config.js"></script>
+        <!-- endinject -->
+    </body>
+</html>

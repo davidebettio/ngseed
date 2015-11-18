@@ -1,63 +1,69 @@
 'use strict';
 
 var gulp = require('gulp');
+var config = require('../gulp.config')();
+var libs = require('../gulp.libs');
 var $ = require('gulp-load-plugins')();
-var browserSync = require('browser-sync').create();
-var reload = browserSync.reload;
-var proxy = require('./proxy');
 var util = require('util');
+var browserSync = require('browser-sync');
 var paths = gulp.paths;
+var port = process.env.PORT || config.defaultPort;
 
-function browserSyncInit(baseDir, files) {
+gulp.task('serve-dev', ['inject'], function() {
+  libs.log('serve-dev');
 
-  var routes = null;
-  if (baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
-    routes = {
-      '/bower_components': 'bower_components',
-    };
+  var isDev = true;
+  var nodeOptions = {
+    script: config.nodeServer,
+    delayTime: 1,
+    env: {
+      PORT: port,
+      NODE_ENV: isDev ? 'dev' : 'build',
+    },
+    watch: [config.server],
+  };
+
+  return $.nodemon(nodeOptions)
+    .on('restart', function(event) {
+      libs.log('*** nodemon restarted');
+      libs.log('files changed:\n' + event);
+    })
+    .on('start', function() {
+      libs.log('*** nodemon started');
+      startBrowserSync();
+    })
+    .on('crash', function() {
+      libs.log('*** nodemon crashed');
+    })
+    .on('exit', function() {
+      libs.log('*** nodemon exited');
+    });
+});
+
+function startBrowserSync() {
+  if (browserSync.active) {
+    return;
   }
 
-  browserSync.instance = browserSync.init({
-    files: files,
-    startPath: '/',
-    server: {
-      baseDir: baseDir,
-      middleware: proxy,
-      routes: routes,
+  libs.log('Starting browser-sync on port: ' + port);
+
+  var options = {
+    proxy: 'localhost:' + port,
+    port: 3000,
+    files: [config.client + '**/*.*'],
+    ghostMode: {
+      clicks: true,
+      location: false,
+      forms: true,
+      scroll: true,
     },
-  });
+    injectChanges: true,
+    logFileChanges: true,
+    logLevel: 'debug',
+    logPrefix: 'gulp-patterns',
+    notify: true,
+    reloadDelay: 1000,
+  };
+
+  browserSync(options);
 }
-
-gulp.task('watch', ['inject'], function() {
-  gulp.watch([
-    paths.src + '/*.html',
-    paths.src + '/{app,components}/**/*.css',
-    paths.src + '/{app,components}/**/*.js',
-    'bower.json',
-  ]);
-});
-
-gulp.task('nodemon', [], function() {
-  $.nodemon({
-    script: 'server.js',
-    ext: 'js html',
-    env: { NODE_ENV: 'development' },
-  });
-});
-
-gulp.task('serve', ['inject', 'nodemon'], function() {
-  browserSyncInit([
-    paths.tmp,
-    paths.src,
-  ]);
-
-  gulp.watch([
-    paths.src + '/**/*.css',
-    paths.src + '/**/*.js',
-    paths.src + '/**/*.html',
-  ], ['watch']);
-});
-
-gulp.task('serve:dist', ['build'], function() {
-  browserSyncInit(paths.dist);
-});

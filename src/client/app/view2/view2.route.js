@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('ngseed.view2', [])
+    .module('ngseed.view2')
     .config(route);
 
   function route($stateProvider) {

@@ -11,6 +11,7 @@
     activate();
 
     function activate() {
+      console.log('activate');
       vm.testvar = '';
       vm.getMyIP = function() {
         $http.get('http://httpbin.org/ip').then(function(response) {

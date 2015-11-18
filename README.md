@@ -18,3 +18,4 @@ server {
   }
 }
 ```
+fish.json url prefix: http://i.istockimg.com/file_thumbview_approve/
