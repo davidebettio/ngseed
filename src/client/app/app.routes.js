@@ -7,6 +7,6 @@
 
   function routes($urlRouterProvider) {
     // default state
-    $urlRouterProvider.otherwise('/view1');
+    $urlRouterProvider.otherwise('/home');
   }
 })();

@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('ngseed.view1', []);
+    .module('ngseed.home', []);
 
 })();

@@ -24,15 +24,17 @@
     }
   }
 
-  HeaderController.$inject = ['$log'];
+  HeaderController.$inject = ['$location'];
 
-  function HeaderController($log) {
+  function HeaderController($location) {
     var vm = this;
 
     activate();
 
     function activate() {
-      $log.info('header controller');
+      vm.isActive = function(viewLocation) {
+        return viewLocation === $location.path();
+      };
     }
   }
 })();

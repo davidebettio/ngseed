@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('ngseed.view1')
-    .controller('View1Controller', View1Controller);
+    .module('ngseed.home')
+    .controller('HomeController', HomeController);
 
-  function View1Controller($http) {
+  function HomeController($http, $state) {
     var vm = this;
-
+    console.log($state.current);
     activate();
 
     function activate() {

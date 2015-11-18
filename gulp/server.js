@@ -62,7 +62,7 @@ function startBrowserSync() {
     },
     injectChanges: true,
     logFileChanges: true,
-    logLevel: 'debug',
+    /* logLevel: 'debug', */
     logPrefix: 'gulp-patterns',
     notify: true,
     reloadDelay: 1000,

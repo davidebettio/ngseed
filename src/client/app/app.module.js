@@ -7,8 +7,8 @@
       'angular-loading-bar',
       'ngAnimate',
       'ngseed.layout',
-      'ngseed.view1',
-      'ngseed.view2',
+      'ngseed.home',
+      'ngseed.about',
     ]);
 
 })();
