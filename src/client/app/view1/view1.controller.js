@@ -5,23 +5,23 @@
     .module('ngseed.view1')
     .controller('View1Controller', View1Controller);
 
-  function View1Controller($http, $log) {
+  function View1Controller($http) {
     var vm = this;
 
     activate();
 
     function activate() {
-      console.log('activate');
-      vm.testvar = '';
+      vm.myIp = '';
+      vm.customers = [];
       vm.getMyIP = function() {
         $http.get('http://httpbin.org/ip').then(function(response) {
-          $log.info(response.data);
+          vm.myIp = response.data.origin;
         });
       };
 
       vm.testLocalServer = function() {
-        $http.get('api/sample').then(function(response) {
-          $log.info(response.data);
+        $http.get('api/customers').then(function(response) {
+          vm.customers = response.data;
         });
       };
     }

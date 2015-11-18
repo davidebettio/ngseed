@@ -3,16 +3,16 @@
 
   angular
     .module('ngseed.layout')
-    .directive('header', header);
+    .directive('footer', footer);
 
-  function header() {
+  function footer() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/layout/header.tpl.html',
+      templateUrl: 'app/layout/footer.tpl.html',
       scope: {
       },
       link: linkFunc,
-      controller: HeaderController,
+      controller: FooterController,
       controllerAs: 'vm',
       bindToController: true,
     };
@@ -24,15 +24,15 @@
     }
   }
 
-  HeaderController.$inject = ['$log'];
+  FooterController.$inject = ['$log'];
 
-  function HeaderController($log) {
+  function FooterController($log) {
     var vm = this;
 
     activate();
 
     function activate() {
-      $log.info('header controller');
+      $log.info('footer controller');
     }
   }
 })();

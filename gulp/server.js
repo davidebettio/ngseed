@@ -50,7 +50,10 @@ function startBrowserSync() {
   var options = {
     proxy: 'localhost:' + port,
     port: 3000,
-    files: [config.client + '**/*.*'],
+    files: [
+      config.client + '**/*.*',
+      config.temp + '**/*.css',
+    ],
     ghostMode: {
       clicks: true,
       location: false,
@@ -63,6 +66,7 @@ function startBrowserSync() {
     logPrefix: 'gulp-patterns',
     notify: true,
     reloadDelay: 1000,
+    open: false,
   };
 
   browserSync(options);

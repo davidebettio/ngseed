@@ -11,7 +11,7 @@
         url: '/view2',
         controller: 'View2Controller',
         controllerAs: 'vm',
-        templateUrl: './view2.html',
+        templateUrl: './view2.tpl.html',
       });
   }
 })();

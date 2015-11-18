@@ -11,7 +11,7 @@
         url: '/view1',
         controller: 'View1Controller',
         controllerAs: 'vm',
-        templateUrl: 'app/view1/view1.html',
+        templateUrl: 'app/view1/view1.tpl.html',
       });
   }
 })();
