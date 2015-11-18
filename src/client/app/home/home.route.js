@@ -12,9 +12,6 @@
         controller: 'HomeController',
         controllerAs: 'vm',
         templateUrl: 'app/home/home.tpl.html',
-        data:{
-          customData:  'Hello World!',
-        },
       });
   }
 })();

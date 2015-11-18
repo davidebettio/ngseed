@@ -6,8 +6,12 @@
     .value('version', '0.0.1')
     .config(config);
 
-  function config(cfpLoadingBarProvider) {
+  function config(cfpLoadingBarProvider, $locationProvider) {
+
     // loading bar
-    cfpLoadingBarProvider.includeSpinner = false;
+    cfpLoadingBarProvider.includeSpinner = true;
+
+    // html5Mode
+    $locationProvider.html5Mode(true);
   }
 })();

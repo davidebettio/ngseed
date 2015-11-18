@@ -7,7 +7,7 @@
 
   function HomeController($http, $state) {
     var vm = this;
-    console.log($state.current);
+
     activate();
 
     function activate() {
