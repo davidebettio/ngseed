@@ -16,8 +16,8 @@
         <li ng-class="{active: vm.isActive('/about')}"><a ui-sref="about">About</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="./">Login</a></li>
-        <li><a href="../navbar-static-top/">Register</a></li>
+        <li ng-class="{active: vm.isActive('/login')}"><a ui-sref="login">Login</a></li>
+        <li ng-class="{active: vm.isActive('/register')}"><a ui-sref="register">Register</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container-fluid -->

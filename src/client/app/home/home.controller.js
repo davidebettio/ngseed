@@ -7,23 +7,27 @@
 
   function HomeController($http, $state) {
     var vm = this;
+    vm.getMyIP = getMyIP;
+    vm.testLocalServer = testLocalServer;
+    vm.myIp = '';
+    vm.customers = [];
 
     activate();
 
     function activate() {
-      vm.myIp = '';
-      vm.customers = [];
-      vm.getMyIP = function() {
-        $http.get('http://httpbin.org/ip').then(function(response) {
-          vm.myIp = response.data.origin;
-        });
-      };
-
-      vm.testLocalServer = function() {
-        $http.get('api/customers', { cache: true}).then(function(response) {
-          vm.customers = response.data;
-        });
-      };
     }
+
+    function getMyIP() {
+      $http.get('http://httpbin.org/ip').then(function(response) {
+        vm.myIp = response.data.origin;
+      });
+    }
+
+    function testLocalServer() {
+      $http.get('api/customers', { cache: true}).then(function(response) {
+        vm.customers = response.data;
+      });
+    }
+
   }
 })();
