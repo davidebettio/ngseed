@@ -27,6 +27,9 @@ gulp.task('serve-dev', ['inject'], function() {
     .on('restart', function(event) {
       libs.log('*** nodemon restarted');
       libs.log('files changed:\n' + event);
+      setTimeout(function() {
+
+      }, config.browserReloadDelay);
     })
     .on('start', function() {
       libs.log('*** nodemon started');
@@ -47,11 +50,17 @@ function startBrowserSync() {
 
   libs.log('Starting browser-sync on port: ' + port);
 
+  gulp.watch([config.less], ['styles'])
+    .on('change', function(event) {
+      libs.log('File ' + event.path + ' ' + event.type);
+    });
+
   var options = {
     proxy: 'localhost:' + port,
     port: 3000,
     files: [
       config.client + '**/*.*',
+      '!' + config.less,
       config.temp + '**/*.css',
     ],
     ghostMode: {

@@ -20,7 +20,7 @@
       };
 
       vm.testLocalServer = function() {
-        $http.get('api/customers').then(function(response) {
+        $http.get('api/customers', { cache: true}).then(function(response) {
           vm.customers = response.data;
         });
       };

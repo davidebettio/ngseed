@@ -14,16 +14,28 @@ module.exports = function() {
       './*.js',
     ],
     client: client,
-    css: temp + 'styles.css',
+    css: [
+      temp + 'vendor.css',
+      temp + 'styles.css',
+    ],
     index: client + 'index.html',
     js: [
       clientApp + '**/*.module.js',
       clientApp + '**/*.js',
       '!' + clientApp + '**/*.spec.js',
     ],
-    less: client + 'styles/styles.less',
+    less: [
+      client + 'styles/vendor.less',
+      client + 'styles/styles.less',
+    ],
     server: server,
     temp: temp,
+
+    /*
+    * Browser sync
+    */
+
+    browserReloadDelay: 1000,
 
     /*
     * Bower and NPM locations
