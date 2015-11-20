@@ -9,10 +9,16 @@ var cors = require('cors');
 var errorHandler = require('./routes/utils/errorHandler')();
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 var port = process.env.PORT || 7203;
 var routes;
 
 var environment = process.env.NODE_ENV;
+
+mongoose.connect('mongodb://localhost:27017/test1');
+mongoose.connection.on('error', function(err) {
+  console.log('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
+});
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({
@@ -25,6 +31,7 @@ app.use(cors());
 app.use(errorHandler.init);
 
 routes = require('./routes/index')(app);
+routes = require('./routes/auth')(app);
 
 console.log('About to crank up node');
 console.log('PORT=' + port);

@@ -7,10 +7,10 @@
 
   function HomeController($http, $state) {
     var vm = this;
-    vm.getMyIP = getMyIP;
-    vm.testLocalServer = testLocalServer;
     vm.myIp = '';
     vm.customers = [];
+    vm.getMyIP = getMyIP;
+    vm.testLocalServer = testLocalServer;
 
     activate();
 

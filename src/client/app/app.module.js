@@ -10,6 +10,7 @@
       'ngseed.home',
       'ngseed.about',
       'ngseed.session',
+      'satellizer',
     ]);
 
 })();

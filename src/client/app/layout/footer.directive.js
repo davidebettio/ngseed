@@ -24,15 +24,14 @@
     }
   }
 
-  FooterController.$inject = ['$log'];
+  FooterController.$inject = [];
 
-  function FooterController($log) {
+  function FooterController() {
     var vm = this;
 
     activate();
 
     function activate() {
-      $log.info('footer controller');
     }
   }
 })();

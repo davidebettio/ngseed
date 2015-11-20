@@ -12,6 +12,7 @@
         controller: 'AboutController',
         controllerAs: 'vm',
         templateUrl: 'app/about/about.tpl.html',
+        requireAuth: true,
       });
   }
 })();

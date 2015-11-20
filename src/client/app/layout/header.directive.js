@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -9,8 +9,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/layout/header.tpl.html',
-      scope: {
-      },
+      scope: {},
       link: linkFunc,
       controller: HeaderController,
       controllerAs: 'vm',
@@ -24,17 +23,30 @@
     }
   }
 
-  HeaderController.$inject = ['$location'];
+  HeaderController.$inject = ['$location', '$auth'];
 
-  function HeaderController($location) {
+  function HeaderController($location, $auth) {
     var vm = this;
+    vm.isActive = isActive;
+    vm.isAuthenticated = isAuthenticated;
+    vm.logout = logout;
 
     activate();
 
     function activate() {
-      vm.isActive = function(viewLocation) {
-        return viewLocation === $location.path();
-      };
+
+    }
+
+    function isActive(viewLocation) {
+      return viewLocation === $location.path();
+    }
+
+    function isAuthenticated() {
+      return $auth.isAuthenticated();
+    }
+
+    function logout() {
+      $auth.logout();
     }
   }
 })();
